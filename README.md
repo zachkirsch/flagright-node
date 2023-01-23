@@ -21,7 +21,7 @@ const client = new FlagrightApiClient({
 
 const response = await client.transaction.retrieve('transaction-id');
 
-console.log('Received response from {Company}!', response);
+console.log('Received response from Flagright!', response);
 ```
 
 ## Beta status
