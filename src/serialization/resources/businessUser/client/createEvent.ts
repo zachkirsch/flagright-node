@@ -9,7 +9,7 @@ import * as core from "../../../../core";
 export const Request: core.serialization.Schema<
     serializers.businessUser.createEvent.Request.Raw,
     FlagrightApi.BusinessUserEvent
-> = core.serialization.lazy(async () => (await import("../../..")).BusinessUserEvent);
+> = core.serialization.lazyObject(async () => (await import("../../..")).BusinessUserEvent);
 
 export declare namespace Request {
     type Raw = serializers.BusinessUserEvent.Raw;

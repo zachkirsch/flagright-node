@@ -6,11 +6,27 @@ import * as serializers from "../../..";
 import { FlagrightApi } from "@fern-api/flagright";
 import * as core from "../../../../core";
 
-export const BusinessUserEvent: core.serialization.Schema<
+export const BusinessUserEvent: core.serialization.ObjectSchema<
     serializers.BusinessUserEvent.Raw,
     FlagrightApi.BusinessUserEvent
-> = core.serialization.record(core.serialization.string(), core.serialization.unknown());
+> = core.serialization.object({
+    timestamp: core.serialization.number(),
+    userId: core.serialization.string(),
+    eventId: core.serialization.string().optional(),
+    reason: core.serialization.string().optional(),
+    eventDescription: core.serialization.string().optional(),
+    updatedBusinessUserAttributes: core.serialization
+        .lazyObject(async () => (await import("../../..")).BusinessOptional)
+        .optional(),
+});
 
 export declare namespace BusinessUserEvent {
-    type Raw = Record<string, unknown>;
+    interface Raw {
+        timestamp: number;
+        userId: string;
+        eventId?: string | null;
+        reason?: string | null;
+        eventDescription?: string | null;
+        updatedBusinessUserAttributes?: serializers.BusinessOptional.Raw | null;
+    }
 }
